@@ -60,13 +60,13 @@ const TransactionList: React.FC<TransactionListProps> = ({
   };
 
   const getTypeLabel = (transaction: TransactionItem): string => {
-    if ('to' in transaction) return 'Transfer';
+    if ('to' in transaction) return '转账';
     if ('from' in transaction && !('to' in transaction)) {
-      if (type === TransactionType.FREEZE) return 'Freeze';
-      if (type === TransactionType.UNFREEZE) return 'Unfreeze';
-      return 'Burn';
+      if (type === TransactionType.FREEZE) return '冻结';
+      if (type === TransactionType.UNFREEZE) return '解冻';
+      return '销毁';
     }
-    return 'Unknown';
+    return '未知';
   };
 
   const handleTxClick = (txHash: string) => {
@@ -112,7 +112,7 @@ const TransactionList: React.FC<TransactionListProps> = ({
           ) : transactions.length === 0 ? (
             <div className="p-8 text-center text-gray-500">
               <div className="mb-2">{getIcon()}</div>
-              <p>No {title.toLowerCase()} found</p>
+              <p>暂无{title}数据</p>
             </div>
           ) : (
             transactions.map((transaction) => (
@@ -131,7 +131,7 @@ const TransactionList: React.FC<TransactionListProps> = ({
                         <button
                           onClick={() => handleTxClick(transaction.transactionHash)}
                           className="text-xs text-blue-600 hover:text-blue-800 flex items-center space-x-1"
-                          title="View on Etherscan"
+                          title="在区块浏览器中查看"
                         >
                           <span>{formatTxHash(transaction.transactionHash)}</span>
                           <ExternalLink size={12} />
@@ -140,7 +140,7 @@ const TransactionList: React.FC<TransactionListProps> = ({
                       
                       <div className="flex items-center space-x-4 text-sm text-gray-600">
                         <div className="flex items-center space-x-1">
-                          <span>From:</span>
+                          <span>从:</span>
                           <AddressFormatter 
                             address={transaction.from} 
                             length={4}
@@ -151,7 +151,7 @@ const TransactionList: React.FC<TransactionListProps> = ({
                         
                         {'to' in transaction && (
                           <div className="flex items-center space-x-1">
-                            <span>To:</span>
+                            <span>到:</span>
                             <AddressFormatter 
                               address={transaction.to} 
                               length={4}
@@ -166,7 +166,7 @@ const TransactionList: React.FC<TransactionListProps> = ({
                   
                   <div className="text-right flex-shrink-0">
                     <div className="text-lg font-semibold text-gray-900 mb-1">
-                      {formatTokenValue(transaction.value)} YD
+                      {formatTokenValue(transaction.value)} BNB
                     </div>
                     <div className="text-xs text-gray-500">
                       {formatRelativeTime(transaction.blockTimestamp)}

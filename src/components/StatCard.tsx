@@ -33,21 +33,21 @@ const StatCard: React.FC<StatCardProps> = ({
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
-      <div className="flex items-center justify-between">
-        <div className="flex-1">
-          <h3 className="text-sm font-medium text-gray-600 mb-1">{title}</h3>
+      <div className="flex items-start justify-between">
+        <div className="flex-1 min-w-0 pr-3">
+          <h3 className="text-sm font-medium text-gray-600 mb-2 whitespace-nowrap">{title}</h3>
           {loading ? (
             <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
           ) : (
-            <p className="text-2xl font-bold text-gray-900">{value}</p>
+            <p className="text-xl font-bold text-gray-900 break-words leading-tight">{value}</p>
           )}
           {change && !loading && (
-            <p className={`text-sm ${getChangeColor()} mt-1`}>
+            <p className={`text-sm ${getChangeColor()} mt-1 break-words`}>
               {change}
             </p>
           )}
         </div>
-        <div className={`p-3 rounded-full bg-gray-50 ${iconColor}`}>
+        <div className={`p-3 rounded-full bg-gray-50 ${iconColor} flex-shrink-0`}>
           <Icon size={24} />
         </div>
       </div>
